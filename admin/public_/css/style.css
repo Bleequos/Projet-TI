@@ -1,0 +1,91 @@
+/* Réinitialisation du style du corps et ajout d'un arrière-plan */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9fff4; /* couleur de fond légère vert pâle pour le confort visuel */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style de l'en-tête */
+header#header {
+    background-color: #4CAF50; /* Vert vif pour l'en-tête */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header#header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+}
+
+/* Amélioration de la barre de navigation */
+.navbar {
+    background-color: #388E3C; /* Vert foncé pour la barre de navigation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile pour un effet de profondeur */
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link {
+    background-color: #2E7D32; /* Vert encore plus foncé au survol */
+}
+
+/* Style du contenu */
+#contenu {
+    padding: 20px;
+    background-color: white; /* Fond blanc pour le contenu pour une lecture facile */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Légère ombre autour du contenu */
+    margin-bottom: 20px;
+}
+
+/* Pied de page */
+footer#footer {
+    background-color: #4CAF50; /* Assorti à l'en-tête */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer#footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+/* Amélioration de la barre de navigation */
+.navbar {
+    background-color: #388E3C; /* Vert foncé pour la barre de navigation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile pour un effet de profondeur */
+}
+
+.navbar .navbar-nav .nav-link {
+    color: black; /* Changement de la couleur du texte en noir */
+    font-weight: bold;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link {
+    background-color: #2E7D32; /* Vert encore plus foncé au survol */
+    color: white; /* Texte en blanc pour un contraste élevé au survol */
+}
+/* Réinitialisation du style du corps et ajout d'un arrière-plan */
+/* Réinitialisation du style du corps et ajout d'un arrière-plan */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #a5d6a7; /* Un vert prairie moins clair pour un meilleur contraste et confort visuel */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
