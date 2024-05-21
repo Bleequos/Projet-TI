@@ -5,21 +5,30 @@ $(document).ready(function () {
 
     //quand une balise contient des atttributs,
     //cette balise est un tableau
+
+
+
+    $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
+
+    $('#reset').click(function () {
+        $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
+    })
+
     $("td[id]").click(function () {
         //trim : supprimer les blancs avant et après
         let valeur1 = $.trim($(this).text());
-        let id = $(this).attr('id');
+        let cours_id = $(this).attr('id');
         let name = $(this).attr('name');
-        console.log(valeur1 + " id = " + id + " name = " + name);
+        console.log(valeur1 + " cours_id = " + cours_id + " name = " + name);
         $(this).blur(function () {
             let valeur2 = $.trim($(this).text());
             if (valeur1 != valeur2) {
-                let parametre = "id=" + id + "&name=" + name + "&valeur=" + valeur2;
+                let parametre = "cours_id=" + cours_id + "&name=" + name + "&valeur=" + valeur2;
                 let retour = $.ajax({
                     type: 'get',
                     dataType: 'json',
                     data: parametre,
-                    url: './src/php/ajax/ajaxUpdateClient.php',
+                    url: './src/php/ajax/ajaxUpdateCours.php',
                     success: function (data) {//data = retour du # php
                         console.log(data);
                     }
@@ -29,52 +38,41 @@ $(document).ready(function () {
     })
 
 
-    $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
-
-    $('#reset').click(function () {
-        $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
-    })
-
-
     $('#texte_bouton_submit').click(function (e) { //e = formulaire
         e.preventDefault(); //empêcher l'attribut action de form
-        let email = $('#email').val();
-        let nom = $('#nom').val();
-        let prenom = $('#prenom').val();
-        let adresse = $('#adresse').val();
-        let numero = $('#numero').val();
-        let param = 'email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&adresse=' + adresse + '&numero=' + numero;
+        let Titre = $('#Titre').val();
+        let Description = $('#Description').val();
+        let enseignant_id = $('#enseignant_id').val();
+        let param = 'Titre=' + Titre + '&Description=' + Description + '&enseignant_id=' + enseignant_id ;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
             data: param,
-            url: './src/php/ajax/ajaxAjoutClient.php',
+            url: './src/php/ajax/ajaxAjoutCours.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
             }
         })
     })
 
-    $('#email').blur(function () {
-        let email = $(this).val();
-        console.log("email : " + email);
-        let parametre = 'email=' + email;
+    $('#Titre').blur(function () {
+        let Titre = $(this).val();
+        console.log("Titre : " + Titre);
+        let parametre = 'Titre=' + Titre;
         let retour = $.ajax({
             type: 'get',
             dataType: 'json',
             data: parametre,
-            url: './src/php/ajax/ajaxRechercheClient.php',
+            url: './src/php/ajax/ajaxRechercheCours.php',
             success: function (data) {//data = retour du # php
                 console.log(data);
-
-                $('#nom').val(data[0].nom_client);
-                $('#prenom').val(data[0].prenom_client);
-                $('#adresse').val(data[0].adresse);
-                $('#numero').val(data[0].numero);
+                $('#Description').val(data[0].Description);
+                $('#Titre').val(data[0].Titre);
+                $('#enseignant_id').val(data[0].enseignant_id);
                 $('#texte_bouton_submit').text("Mettre à jour");
 
-                let nom2 = $('#nom').val();
-                if (nom2 === '') {
+                let enseignant_id = $('#enseignant_id').val();
+                if (enseignant_id === '') {
                     $('#texte_bouton_submit').text("Ajouter");
                 }
 
@@ -82,23 +80,9 @@ $(document).ready(function () {
         })
     })
 
-    $('#delete').click(function (e) { //e = formulaire
-        e.preventDefault(); //empêcher l'attribut action de form
-        let id = $(this).attr('value');
-        let param = 'id=' + id ;
-        console.log(param);
-        let retour = $.ajax({
-            type: 'get',
-            dataType: 'json',
-            data: param,
-            url: './src/php/ajax/ajaxDeleteClient.php',
-            success: function (data) {//data = retour du # php
-                console.log(data);
-                let ligne=$(this).closest('tr');
-                ligne.hide();
-            }
-        })
-    })
+
+
+
 
 
     $('#vie').hide();
@@ -111,40 +95,29 @@ $(document).ready(function () {
     $('#montrer_image').hide();
 
     $('h1').click(function () {
-        $('#vie').show();
-        $(this).css('color', 'red');
-    })
-
-    $('#vie').mouseover(function () {
-        $(this).css({
-            'font-weight': 'bold',
-            'font-style': 'italic',
-            'color': '#0044AA'
-        });
-        $(this).mouseout(function () {
-            $('#para1').show();
-        })
-    })
+        $('#vie').fadeIn('slow');
+        $(this).css('color', '#007bff');
+        $('#para1').fadeIn('slow');
+    });
 
     $('#para1').click(function () {
         $('#deuxieme').slideDown('slow');
-    })
+    });
 
     $('#para2').click(function () {
-        $('#troisieme').fadeIn('slow');
-    })
+        $('#troisieme').slideDown('slow');
+    });
 
     $('#para3').click(function () {
-        $('#quatrieme').fadeIn('fast');
-    })
+        $('#quatrieme').slideDown('slow');
+    });
 
-    $('#quatrieme').click(function () {
-        $('#cinquieme').fadeIn(5000);
-        $('#cacher').show();
-    })
+    $('#para4').click(function () {
+        $('#cinquieme').slideDown('slow');
+        $('#cacher').fadeIn('slow');
+    });
 
     $('#cacher').click(function () {
-        $('#montrer_image').fadeIn(2000);
-    })
-
+        $('#montrer_image').fadeIn('slow');
+    });
 });

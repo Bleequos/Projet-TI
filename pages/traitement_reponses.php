@@ -32,16 +32,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Récupération de l'identifiant de la réponse soumise
                     $reponse_id = $_POST[$key];
 
-                    // Vérifie si la réponse soumise correspond à la réponse correcte
-                    if ($cat->estReponseCorrecte($reponse_id)) {
-                        // Incrémente le score si la réponse est correcte
-                        $score++;
+                    // Récupération des réponses correctes pour cette question
+                    $bonnes_reponses = $cat->getBonnesReponses($question->question_id);
+
+                    // Comparer la réponse soumise avec les bonnes réponses
+                    foreach ($bonnes_reponses as $bonne_reponse) {
+                        if ($reponse_id == $bonne_reponse->reponse_id) {
+                            // Incrémente le score si la réponse est correcte
+                            $score++;
+                            break;
+                        }
                     }
+                }
+
+                // Affichage des bonnes réponses pour cette question
+                echo "Voici les bonnes réponses pour la question {$question->question_id} : <br>";
+                foreach ($bonnes_reponses as $reponse) {
+                    echo "{$reponse->texte_reponse} <br>";
                 }
             }
 
-            // Affichage du score et du nombre total de questions
+            // Calcul du pourcentage de bonnes réponses
+            $pourcentage_bonnes_reponses = ($score / $total_questions) * 100;
+
+            // Affichage du score et du pourcentage de bonnes réponses
             echo "Votre score pour le quiz $quiz_id est de : $score / $total_questions";
+            echo "<br>Pourcentage de bonnes réponses : $pourcentage_bonnes_reponses%";
 
             // Redirection vers une page avec le score affiché, ou traitement supplémentaire si nécessaire
             // header("Location: page_resultat_quiz.php?score=$score");
@@ -58,9 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si la méthode de requête n'est pas POST
     echo "Erreur : méthode de requête non autorisée";
 }
-
-// Ajoutons un var_dump pour vérifier les données soumises via le formulaire POST
-var_dump($_POST);
 ?>
 
 

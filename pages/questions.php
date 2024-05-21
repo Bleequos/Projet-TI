@@ -24,16 +24,6 @@ if(isset($_GET['quiz_id']) && !empty($_GET['quiz_id'])) {
     // Vérifie si des questions ont été récupérées
     if($listeQuestions) {
         ?>
-        <!DOCTYPE html>
-        <html lang="fr">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Questions du Quiz</title>
-            <!-- Bootstrap CSS -->
-            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        </head>
-        <body>
         <div class="container">
             <h1 class="mt-5 mb-4">Quiz : <?php echo $listeQuestions[0]->titre_quiz; ?></h1>
             <form action="index_.php?&page=traitement_reponses.php" method="post">
@@ -67,8 +57,6 @@ if(isset($_GET['quiz_id']) && !empty($_GET['quiz_id'])) {
                 <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
         </div>
-        </body>
-        </html>
         <?php
     } else {
         // Affiche un message d'erreur si aucune question n'a été trouvée pour le quiz spécifié

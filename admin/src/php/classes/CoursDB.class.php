@@ -9,6 +9,56 @@ class CoursDB extends Cours
     {
         $this->_bd = $cnx;
     }
+
+    public function ajout_cours($titre,$description,$enseignant_id){
+        try{
+            $query="select ajout_cours(:titre,:description,:enseignant_id)";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':titre',$titre);
+            $res->bindValue(':description',$description);
+            $res->bindValue(':enseignant_id',$enseignant_id);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        }catch(PDOException $e){
+            print "Echec ".$e->getMessage();
+        }
+    }
+
+    public function getCoursByTitre($titre) {
+        try {
+            $query = "SELECT * FROM cours WHERE titre = :titre";
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':titre', $titre);
+            $res->execute();
+            $data = $res->fetch();
+            return $data;
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
+        }
+    }
+
+    public function updateCours($cours_id,$name,$valeur){
+        $query="select update_cours(:cours_id,:name,:valeur)";
+        //$query= "update client set $champ='$valeur' where id_client=$id";
+        try{
+            $this->_bd->beginTransaction();
+            $res = $this->_bd->prepare($query);
+            $res->bindValue(':cours_id',$cours_id);
+            $res->bindValue(':name',$name);
+            $res->bindValue(':valeur',$valeur);
+            $res->execute();
+            $this->_bd->commit();
+        }catch(PDOException $e){
+            $this->_bd->rollback();
+            print "Echec ".$e->getMessage();
+        }
+    }
+
+
+
+
+
     public function getAllCours()
     {
         $query = "SELECT * FROM vue_details_cours"; // Utilisation de la vue créée
@@ -133,25 +183,30 @@ class CoursDB extends Cours
             return null;
         }
     }
-    function estReponseCorrecte($reponse_id) {
-        // Effectue une requête pour récupérer l'information sur si la réponse est correcte depuis la vue vue_questions_reponses
-        // Assurez-vous d'adapter cette requête en fonction de votre base de données et de la structure de votre vue
-        $query = "SELECT est_correcte FROM vue_questions_reponses WHERE reponse_id = :reponse_id";
+
+
+
+    public function getBonnesReponses($question_id) {
+        // Effectue une requête pour récupérer les réponses correctes à la question spécifiée
+        $query = "SELECT * FROM vue_questions_reponses WHERE question_id = :question_id AND est_correcte = true";
         try {
             $this->_bd->beginTransaction();
             $resultset = $this->_bd->prepare($query);
-            $resultset->bindValue(':reponse_id', $reponse_id);
+            $resultset->bindValue(':question_id', $question_id);
             $resultset->execute();
-            $est_correcte = $resultset->fetchColumn(); // Récupère directement la valeur de la colonne 'est_correcte'
+            $bonnes_reponses = $resultset->fetchAll(PDO::FETCH_OBJ); // Récupère toutes les bonnes réponses sous forme d'objets
             $this->_bd->commit();
 
-            // Vérifie si la réponse est correcte en comparant avec 'true'
-            return $est_correcte === 'true';
+            // Retourne les bonnes réponses
+            return $bonnes_reponses;
         } catch (PDOException $e) {
             $this->_bd->rollback();
             print "Echec de la requête " . $e->getMessage();
-            return false; // En cas d'erreur, retourne false (la réponse n'est pas correcte)
+            return false; // En cas d'erreur, retourne false
         }
     }
+
+
+
 
 }
