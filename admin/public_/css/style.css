@@ -85,6 +85,11 @@ body {
     box-sizing: border-box;
 }
 
+.course-image {
+    width: 0.04px; /* adjust as needed */
+    height: 0.04px; /* adjust as needed */
+    margin: 0 auto;
+}
 
 
 

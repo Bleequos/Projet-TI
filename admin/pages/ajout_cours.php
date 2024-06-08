@@ -7,7 +7,7 @@ $enseignants = $cl->getAllEnseignants();
     <form id="form_ajout" method="get" action="">
         <div class="mb-3">
             <label for="Titre" class="form-label">Titre du cours</label>
-            <input type="text" class="form-control" id="Titre" name="Titre">
+            <input type="text" class="form-control" id="Titre" name="Titre" data-toggle="modal" data-target="#myModal">
         </div>
         <div class="mb-3">
             <label for="Description" class="form-label">Description</label>
@@ -22,15 +22,14 @@ $enseignants = $cl->getAllEnseignants();
             </select>
         </div>
         <div class="mb-3">
-            <label for="image_link" class="form-label">Lien de l'image</label>
-            <input type="text" class="form-control" id="image_link" name="image_link">
+            <label for="lien_image" class="form-label">Lien de l'image</label>
+            <input type="text" class="form-control" id="lien_image" name="lien_image">
         </div>
         <div class="mb-3">
-            <label for="video_link" class="form-label">Lien de la vidéo</label>
-            <input type="text" class="form-control" id="video_link" name="video_link">
+            <label for="lien_video" class="form-label">Lien de la vidéo</label>
+            <input type="text" class="form-control" id="lien_video" name="lien_video">
         </div>
-        <button type="submit" id="texte_bouton_submit" value="Ajouter" class="btn btn-primary">
-            Ajouter ou Modifier
+        <button type="submit" id="texte_bouton_submit" value="Ajouter" class="btn btn-primary">Ajouter ou Modifier
         </button>
         <button class="btn btn-primary" type="reset" id="reset">Annuler</button>
     </form>
