@@ -10,50 +10,48 @@ class CoursDB extends Cours
         $this->_bd = $cnx;
     }
 
-    public function ajout_cours($titre,$description,$enseignant_id){
+    public function ajout_cours($titre, $description, $enseignant_id, $image_link, $video_link){
         try{
-            $query="select ajout_cours(:titre,:description,:enseignant_id)";
-            $res = $this->_bd->prepare($query);
-            $res->bindValue(':titre',$titre);
-            $res->bindValue(':description',$description);
-            $res->bindValue(':enseignant_id',$enseignant_id);
-            $res->execute();
-            $data = $res->fetch();
-            return $data;
-        }catch(PDOException $e){
-            print "Echec ".$e->getMessage();
-        }
-    }
-
-    public function getCoursByTitre($titre) {
-        try {
-            $query = "SELECT * FROM cours WHERE titre = :titre";
+            // Appel de la fonction ajout_cours
+            $query="SELECT ajout_cours(:titre, :description, :enseignant_id, :image_link, :video_link)";
             $res = $this->_bd->prepare($query);
             $res->bindValue(':titre', $titre);
+            $res->bindValue(':description', $description);
+            $res->bindValue(':enseignant_id', $enseignant_id);
+            $res->bindValue(':image_link', $image_link);
+            $res->bindValue(':video_link', $video_link);
             $res->execute();
             $data = $res->fetch();
             return $data;
-        } catch (PDOException $e) {
-            print "Echec " . $e->getMessage();
-        }
-    }
-
-    public function updateCours($cours_id,$name,$valeur){
-        $query="select update_cours(:cours_id,:name,:valeur)";
-        //$query= "update client set $champ='$valeur' where id_client=$id";
-        try{
-            $this->_bd->beginTransaction();
-            $res = $this->_bd->prepare($query);
-            $res->bindValue(':cours_id',$cours_id);
-            $res->bindValue(':name',$name);
-            $res->bindValue(':valeur',$valeur);
-            $res->execute();
-            $this->_bd->commit();
         }catch(PDOException $e){
-            $this->_bd->rollback();
             print "Echec ".$e->getMessage();
         }
     }
+
+
+    public function getAllEnseignants() {
+        // Définir la requête SQL
+        $query = "SELECT * FROM utilisateurs WHERE role = 'enseignant'";
+
+        try {
+            // Exécuter la requête
+            $resultset = $this->_bd->prepare($query);
+            $resultset->execute();
+
+            // Récupérer tous les enseignants
+            $data = $resultset->fetchAll();
+
+            // Retourner les enseignants
+            return $data;
+        } catch (PDOException $e) {
+            print "Echec de la requête " . $e->getMessage();
+            return null;
+        }
+    }
+
+
+
+
 
 
 
@@ -79,6 +77,29 @@ class CoursDB extends Cours
             return null; // Retourne null ou gère l'erreur comme nécessaire
         }
     }
+
+    public function getAllCours2()
+    {
+        $query = "SELECT * FROM vue_details_cours_url"; // Utilisation de la vue créée
+        try {
+            $this->_bd->beginTransaction();
+            $resultset = $this->_bd->prepare($query);
+            $resultset->execute();
+            $data = $resultset->fetchAll();
+            $coursArray = []; // Correction pour initialiser le tableau
+            foreach ($data as $d) {
+                $coursArray[] = new Cours($d); // Supposons que la classe Cours prend un tableau en paramètre
+            }
+            $this->_bd->commit();
+            return $coursArray; // Assurez-vous de retourner le tableau après le commit
+        } catch (PDOException $e) {
+            $this->_bd->rollback();
+            print "Echec de la requête " . $e->getMessage();
+            return null; // Retourne null ou gère l'erreur comme nécessaire
+        }
+    }
+
+
 
     public function getVideosById_cours($id_co)
     {

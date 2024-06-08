@@ -8,7 +8,9 @@ require '../classes/CoursDB.class.php';
 $cnx = Connexion::getInstance($dsn,$user,$password);
 
 $cl = new CoursDB($cnx);
-$data[] = $cl->ajout_cours($_GET['Titre'],$_GET['Description'],$_GET['enseignant_id']);
+$data[] = $cl->ajout_cours($_GET['Titre'],$_GET['Description'],$_GET['enseignant_id'],$_GET['image_link'],$_GET['video_link']);
 print json_encode($data);
+
+
 
 

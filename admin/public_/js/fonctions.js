@@ -1,84 +1,54 @@
 $(document).ready(function () {
-
-    $('#texte_bouton_submit').text("Insérer ou mettre à jour");
-
-
-    //quand une balise contient des atttributs,
-    //cette balise est un tableau
-
-
-
-    $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
-
-    $('#reset').click(function () {
+    // Vérifiez si le bouton d'ajout de cours existe
+    if ($('#texte_bouton_submit').length) {
         $('#texte_bouton_submit').text("Ajouter ou mettre à jour");
-    })
-
-    $("td[id]").click(function () {
-        //trim : supprimer les blancs avant et après
-        let valeur1 = $.trim($(this).text());
-        let cours_id = $(this).attr('id');
-        let name = $(this).attr('name');
-        console.log(valeur1 + " cours_id = " + cours_id + " name = " + name);
-        $(this).blur(function () {
-            let valeur2 = $.trim($(this).text());
-            if (valeur1 != valeur2) {
-                let parametre = "cours_id=" + cours_id + "&name=" + name + "&valeur=" + valeur2;
-                let retour = $.ajax({
-                    type: 'get',
-                    dataType: 'json',
-                    data: parametre,
-                    url: './src/php/ajax/ajaxUpdateCours.php',
-                    success: function (data) {//data = retour du # php
-                        console.log(data);
-                    }
-                })
-            }
-        })
-    })
-
-
-    $('#texte_bouton_submit').click(function (e) { //e = formulaire
-        e.preventDefault(); //empêcher l'attribut action de form
-        let Titre = $('#Titre').val();
-        let Description = $('#Description').val();
-        let enseignant_id = $('#enseignant_id').val();
-        let param = 'Titre=' + Titre + '&Description=' + Description + '&enseignant_id=' + enseignant_id ;
-        let retour = $.ajax({
-            type: 'get',
-            dataType: 'json',
-            data: param,
-            url: './src/php/ajax/ajaxAjoutCours.php',
-            success: function (data) {//data = retour du # php
-                console.log(data);
-            }
-        })
-    })
-
-    $('#Titre').blur(function () {
-        let Titre = $(this).val();
-        console.log("Titre : " + Titre);
-        let parametre = 'Titre=' + Titre;
-        let retour = $.ajax({
-            type: 'get',
-            dataType: 'json',
-            data: parametre,
-            url: './src/php/ajax/ajaxRechercheCours.php',
-            success: function (data) {//data = retour du # php
-                console.log(data);
-                $('#Description').val(data[0].Description);
-                $('#Titre').val(data[0].Titre);
-                $('#enseignant_id').val(data[0].enseignant_id);
-                $('#texte_bouton_submit').text("Mettre à jour");
-
-                let enseignant_id = $('#enseignant_id').val();
-                if (enseignant_id === '') {
-                    $('#texte_bouton_submit').text("Ajouter");
+        $('#texte_bouton_submit').click(function (e) { //e = formulaire
+            e.preventDefault(); //empêcher l'attribut action de form
+            let Titre = $('#Titre').val();
+            let description = $('#Description').val();
+            let enseignant_id = $('#enseignant_id').val();
+            let image_link = $('#image_link').val();
+            let video_link = $('#video_link').val();
+            let param = 'Titre=' + Titre + '&description=' + description + '&enseignant_id=' + enseignant_id + '&image_link=' + image_link + '&video_link=' + video_link;
+            let retour = $.ajax({
+                type: 'get',
+                dataType: 'json',
+                data: param,
+                url: './src/php/ajax/ajaxAjoutCours.php',
+                success: function (data) {//data = retour du # php
+                    console.log(data);
                 }
-
-            }
+            })
         })
-    })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
