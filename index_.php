@@ -16,6 +16,7 @@ require './admin/src/php/utils/liste_includes.php';
     <script src="admin/public_/js/fonctions.js"></script>
     <link rel="icon" href="admin/public_/images/favicon.ico" type="image/x-icon"> <!-- Icône Condorcet, si disponible -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -49,7 +50,6 @@ require './admin/src/php/utils/liste_includes.php';
         <p>&copy; 2024 Condorcet. Tous droits réservés.</p>
     </footer>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

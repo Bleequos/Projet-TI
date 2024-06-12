@@ -1,0 +1,26 @@
+/* Ajout d'un style pour les titres h2 */
+h2 {
+    color: #4CAF50; /* Vert vif pour les titres */
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* Ajout d'un style pour les boutons */
+button {
+    background-color: #4CAF50; /* Vert vif pour les boutons */
+    color: white; /* Texte blanc pour un contraste élevé */
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* Vert plus foncé au survol */
+    color: white;
+}

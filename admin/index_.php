@@ -12,22 +12,7 @@ require './src/php/utils/liste_includes.php';
     <link rel="stylesheet" href="./public_/css/style.css" type="text/css">
     <link rel="stylesheet" href="./public_/css/custom.css" type="text/css">
     <script src="./public_/js/fonctions.js"></script>
-    <style>
-        .nav-link-deconnexion {
-            font-weight: bold;
-            color: #dc3545; /* Rouge Bootstrap pour les dangers/erreurs */
-        }
-        .nav-link-deconnexion:hover {
-            color: #bd2130; /* Rouge foncé pour le survol */
-            text-decoration: underline;
-        }
-        .section-title {
-            margin-top: 50px;
-            margin-bottom: 30px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -71,7 +56,6 @@ require './src/php/utils/liste_includes.php';
         ?>
     </footer>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
