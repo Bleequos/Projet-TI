@@ -113,13 +113,25 @@ $(document).ready(function () {
                 let ligne=$(this).closest('tr');
                 ligne.hide();
 
-                // Show the modal
-                $('#myModal').modal('show');
+                // Store a value in localStorage to show the modal after page reload
+                localStorage.setItem('showModal', 'true');
+
+                // Refresh the page
+                location.reload();
             },
             error: function () {
                 alert("une erreur lors de la suppression");
             }
         });
+    });
+
+// Check localStorage on page load to see if the modal should be shown
+    $(document).ready(function() {
+        if (localStorage.getItem('showModal') === 'true') {
+            $('#myModal').modal('show');
+            // Clear the value in localStorage so the modal doesn't show on subsequent page loads
+            localStorage.removeItem('showModal');
+        }
     });
 
     $('td[name="enseignant_id"]').hover(function() {

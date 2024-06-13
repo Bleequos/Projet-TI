@@ -26,7 +26,7 @@ $enseignants = $cl->getAllEnseignants();
             <input type="text" class="form-control" id="lien_image" name="lien_image">
         </div>
         <div class="mb-3">
-            <label for="lien_video" class="form-label">Lien de la vidéo</label>
+            <label for="lien_video" class="form-label">Lien de la vidéo (mettre la partie de vos liens youtube après : https://www.youtube.com/watch?v=)</label>
             <input type="text" class="form-control" id="lien_video" name="lien_video">
         </div>
         <button type="submit" id="texte_bouton_submit" value="Ajouter" class="btn btn-primary">Ajouter ou Modifier
